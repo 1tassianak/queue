@@ -32,15 +32,22 @@ int dQueue(ppQueue pf){
 
     //verificar se o ponteiro da fila e o conteúdo que o ponteiro pf da fila aponta não são null
     if(pf == NULL || *pf == NULL) return FAIL;
-    
-    //libera o ponteiro dos dados
-    free((*pf)->dados);
 
-    //libera o ponteiro do ponteiro da estrutura
-    free(*pf);
+    //usar cleanQueue para prevenir de usar dQueue sem dar o clean, não é correto, pois ela recebe um ponteiro f, e aqui pede ponteiro do ponteiro, e pode liberar coisas q não queremos
+    // Verifica se a estrutura apontada por *pf é válida
+    if (*pf != NULL) {
+        //garante que os dados internos sejam liberados
+        if ((*pf)->dados != NULL) {
+            free((*pf)->dados);
+            (*pf)->dados = NULL;
+        }
 
-    //atribui NULL ao ponteiro da estrutura
-    *pf = NULL;
+        //libera o ponteiro do ponteiro da estrutura
+        free(*pf);
+
+        //atribui NULL ao ponteiro da estrutura
+        *pf = NULL;
+    }
 
     return SUCCESS;
 
