@@ -1,6 +1,8 @@
 #ifndef QUEUE_PRI_H
 #define QUEUE_PRI_H
 
+#include "queue_pub.h"
+
 //Precisa ser Queue porque no pub está declarado com este nome
 typedef struct Queue{
     void *dados; //ponteiro para o array de dados
